@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "229283988275",
+    "project_id": "bookxchange-d3f20",
+    "storage_bucket": "bookxchange-d3f20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229283988275:android:b3088781809a94ad99f446",
+        "android_client_info": {
+          "package_name": "com.techsultan.bookxchange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229283988275-95o2rh2o98dcmp4glee5jlmajckllgg3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd5uVviUdyu8bfX_adcVKc792ShBdTJRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229283988275-95o2rh2o98dcmp4glee5jlmajckllgg3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

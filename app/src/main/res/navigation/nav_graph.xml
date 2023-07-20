@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authenticationNav">
+
+    <fragment
+        android:id="@+id/home_dest"
+        android:name="com.techsultan.bookxchange.HomeFragment"
+        android:label="BookXchange"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_HomeFragment_to_DetailsBookFragment"
+            app:destination="@id/book_details_dest" />
+        <action
+            android:id="@+id/action_homeFragment_to_addBookFragment"
+            app:destination="@id/add_book_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/book_details_dest"
+        android:name="com.techsultan.bookxchange.BookDetailsFragment"
+        android:label="Book Details"
+        tools:layout="@layout/fragment_book_details">
+
+        <action
+            android:id="@+id/action_Details_Book_Fragment_to_Home_Fragment"
+            app:destination="@id/home_dest" />
+        <argument
+            android:name="book_details"
+            app:argType="com.techsultan.bookxchange.model.Book"
+            app:nullable="true" />
+    </fragment>
+    <navigation android:id="@+id/authenticationNav"
+        app:startDestination="@id/login_dest">
+        <fragment
+            android:id="@+id/login_dest"
+            android:name="com.techsultan.bookxchange.fragments.login.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_signupFragment"
+                app:destination="@id/signup_dest" />
+            <action
+                android:id="@+id/action_loginFragment_to_homeFragment"
+                app:destination="@id/home_dest" />
+        </fragment>
+        <fragment
+            android:id="@+id/signup_dest"
+            android:name="com.techsultan.bookxchange.fragments.signup.SignupFragment"
+            android:label="fragment_signup"
+            tools:layout="@layout/fragment_signup">
+            <action
+                android:id="@+id/action_signupFragment_to_loginFragment"
+                app:destination="@id/login_dest" />
+        </fragment>
+    </navigation>
+    <fragment
+        android:id="@+id/add_book_dest"
+        android:name="com.techsultan.bookxchange.fragments.AddBookFragment"
+        android:label="Add Book"
+        tools:layout="@layout/fragment_add_book">
+        <action
+            android:id="@+id/action_addBookFragment_to_homeFragment"
+            app:destination="@id/home_dest" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile_dest"
+        android:name="com.techsultan.bookxchange.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_dest_to_authenticationNav"
+            app:destination="@id/authenticationNav"
+            app:popUpTo="@id/profile_dest"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>
