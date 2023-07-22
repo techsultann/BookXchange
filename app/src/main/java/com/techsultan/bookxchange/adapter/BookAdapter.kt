@@ -60,6 +60,9 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
                 .load(book.bookImage)
                 .transform(RoundedCorners(7))
                 .into(bookCoverImg)
+            Glide.with(holder.itemView)
+                .load(book.userProfileImage)
+                .into(profileImage)
         }
         holder.itemView.setOnClickListener { mView ->
              val directions = HomeFragmentDirections.actionHomeFragmentToDetailsBookFragment(book)

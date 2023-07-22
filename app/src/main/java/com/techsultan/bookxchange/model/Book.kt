@@ -1,8 +1,8 @@
 package com.techsultan.bookxchange.model
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 
 
 @Parcelize
@@ -16,5 +16,6 @@ data class Book(
     val noOfPages: String? = null,
     val category: String? = null,
     val actionText: String? = null,
+    val userProfileImage: String? = null,
 
-) : Parcelable
+    ) : Parcelable

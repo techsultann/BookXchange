@@ -1,6 +1,5 @@
 package com.techsultan.bookxchange.fragments
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,19 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.techsultan.bookxchange.R
 import com.techsultan.bookxchange.databinding.FragmentAddBookBinding
 import com.techsultan.bookxchange.model.Book
-import java.io.File
 import java.util.UUID
 
 
@@ -107,6 +102,7 @@ class AddBookFragment : Fragment() {
 
             for (button in buttons) {
                 button.isEnabled = true
+
             }
         }
 
@@ -139,10 +135,16 @@ class AddBookFragment : Fragment() {
 
             // Updates the textview based on other buttons
             when (button) {
+                binding.btnSell -> {
+                    val price = binding.etBookPrice.text.toString()
+                    if (price.isNotEmpty()) {
+                        actionText.text = getString(R.string.wants_to_sell_with_price, price)
+                    } else {
+                        actionText.text = getString(R.string.action_sell)
+                    }
+                }
                 binding.btnBuy -> actionText.text = getString(R.string.action_buy)
-                binding.btnSell -> actionText.text = getString(R.string.action_sell)
                 binding.btvSwap -> actionText.text = getString(R.string.action_swap)
-
                 else -> actionText.text = ""
             }
         }
@@ -182,6 +184,7 @@ class AddBookFragment : Fragment() {
                                     val currentUser = Firebase.auth.currentUser
                                     val userId = currentUser?.uid
                                     val userName = currentUser?.displayName
+                                    val userProfileImage = currentUser?.photoUrl.toString()
 
                                     if (userId != null) {
 
@@ -194,7 +197,8 @@ class AddBookFragment : Fragment() {
                                             userName,
                                             bookPages,
                                             category,
-                                            actionText
+                                            actionText,
+                                            userProfileImage
                                         )
 
                                         // This save the book to firebase firestore

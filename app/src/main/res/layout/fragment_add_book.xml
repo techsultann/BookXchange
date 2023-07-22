@@ -100,7 +100,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:hint="Pages"
-        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/ilBookName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ilBookName"
@@ -111,6 +110,7 @@
             android:id="@+id/et_no_of_pages"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:textSize="16sp"
             android:textStyle="italic" />
 
@@ -118,21 +118,42 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ilAuthorName"
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:hint="Author"
         android:inputType="text"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ilBookName"
-        android:hint="Author">
+        app:layout_constraintTop_toBottomOf="@id/ilBookName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAuthorName"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/iL_book_price"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:hint="Price"
+        app:layout_constraintBottom_toBottomOf="@+id/ilAuthorName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ilAuthorName"
+        app:layout_constraintTop_toTopOf="@id/ilAuthorName"
+        app:layout_goneMarginEnd="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_book_price"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:inputType="number"
+            android:textSize="16sp"
+            android:textStyle="italic" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -6,6 +6,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="wants_to_sell_with_price">wants to sell for %1$s</string>
     <string name="action_sell">Wants to sell</string>
     <string name="action_buy">Wants to buy</string>
     <string name="action_swap">Wants to swap</string>

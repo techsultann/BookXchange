@@ -12,6 +12,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -48,6 +49,10 @@ import com.techsultan.bookxchange.databinding.FragmentProfileBinding
              auth.currentUser?.let {
 
                 binding.tvPersonName.text = it.displayName
+                 Glide.with(requireContext())
+                     .load(it.photoUrl)
+                     .into(binding.profileImage)
+
              }
          }
      }
