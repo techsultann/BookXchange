@@ -113,9 +113,6 @@ class AddBookFragment : Fragment() {
         return UUID.randomUUID().toString()
     }
 
-    fun saveBookToFirestore() {
-
-    }
 
     // Function to handle button clicks
     private var selectedButton: Button? = null

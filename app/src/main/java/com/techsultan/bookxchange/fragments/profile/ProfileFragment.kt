@@ -1,4 +1,4 @@
- package com.techsultan.bookxchange.fragments
+ package com.techsultan.bookxchange.fragments.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,9 +15,9 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.techsultan.bookxchange.R
-import com.techsultan.bookxchange.databinding.FragmentHomeBinding
 import com.techsultan.bookxchange.databinding.FragmentProfileBinding
 
 
@@ -26,6 +26,7 @@ import com.techsultan.bookxchange.databinding.FragmentProfileBinding
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
      private lateinit var auth: FirebaseAuth
+     private val firestore = Firebase.firestore
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +44,14 @@ import com.techsultan.bookxchange.databinding.FragmentProfileBinding
          menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
          auth = Firebase.auth
+
+         binding.cardviewBooks.setOnClickListener {
+             findNavController().navigate(R.id.action_profile_dest_to_my_books_dest)
+         }
+
+
+
+         noOfBooksUploaded()
 
          if (auth.currentUser != null) {
 
@@ -82,6 +91,24 @@ import com.techsultan.bookxchange.databinding.FragmentProfileBinding
      override fun onDestroy() {
          super.onDestroy()
          _binding = null
+     }
+
+     private fun noOfBooksUploaded() {
+
+         val currentUser = auth.currentUser
+         val userId = currentUser?.uid
+
+         if (userId != null) {
+             firestore.collection("users").document(userId).collection("books")
+                 .get()
+                 .addOnSuccessListener { documents ->
+                     val numberOfBooks = documents.size()
+                     binding.tvNoOfBooks.text = numberOfBooks.toString()
+                 }
+                 .addOnFailureListener {
+                     binding.tvNoOfBooks.text =  "non"
+                 }
+         }
      }
 
 }

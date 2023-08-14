@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile_dest"
-        android:name="com.techsultan.bookxchange.fragments.ProfileFragment"
+        android:name="com.techsultan.bookxchange.fragments.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -75,5 +75,18 @@
             app:destination="@id/authenticationNav"
             app:popUpTo="@id/profile_dest"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profile_dest_to_my_books_dest"
+            app:destination="@id/my_books_dest" />
     </fragment>
+    <fragment
+        android:id="@+id/search_dest"
+        android:name="com.techsultan.bookxchange.fragments.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/my_books_dest"
+        android:name="com.techsultan.bookxchange.fragments.profile.MyBooksFragment"
+        android:label="My Books"
+        tools:layout="@layout/fragment_my_books" />
 </navigation>

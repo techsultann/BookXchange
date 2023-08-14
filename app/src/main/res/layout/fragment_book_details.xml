@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    /<TextView
+    <TextView
         android:id="@+id/tvDetailsBookName"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -130,8 +130,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="16dp"
+        android:textSize="18sp"
         android:text="Harry Potters thirs year at Hogearts starts badly when he learns deranged killer Sirius Black has escaped from Azkaban prison"
-        android:textAlignment="viewStart"
+        android:gravity="top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSynopsis" />

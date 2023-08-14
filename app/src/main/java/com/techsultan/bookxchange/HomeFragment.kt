@@ -28,7 +28,6 @@ class HomeFragment : Fragment(), MenuProvider {
     private val binding get() = _binding!!
     private lateinit var bookViewModel: BookViewModel
     private lateinit var bookAdapter: BookAdapter
-    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreateView(

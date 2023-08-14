@@ -46,7 +46,6 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         val book = differ.currentList[position]
-        val currentUser = Firebase.auth.currentUser
 
         holder.binding.apply {
 

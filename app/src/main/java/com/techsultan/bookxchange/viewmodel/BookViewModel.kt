@@ -17,4 +17,7 @@ class BookViewModel(
 
 
     fun bookResult() = repository.fetchBooks(context = getApplication())
+    fun googleBooksResult() = repository.getGoogleBooksLiveData()
+
+    fun myBooksResult() = repository.myBooksList()
 }
