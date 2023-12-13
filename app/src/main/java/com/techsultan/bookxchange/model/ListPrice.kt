@@ -6,7 +6,9 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
 @Parcelize
-data class LayerInfo(
-    @SerializedName("layers")
-    val layers: List<Layer?>?
+data class ListPrice(
+    @SerializedName("amount")
+    val amount: Double?,
+    @SerializedName("currencyCode")
+    val currencyCode: String?
 ) : Parcelable

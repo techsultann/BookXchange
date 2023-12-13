@@ -1,7 +1,7 @@
 package com.techsultan.bookxchange.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -10,20 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.techsultan.bookxchange.HomeFragment
-import com.techsultan.bookxchange.HomeFragmentDirections
 import com.techsultan.bookxchange.databinding.BooksItemBinding
+import com.techsultan.bookxchange.fragments.home.HomeFragmentDirections
 import com.techsultan.bookxchange.model.Book
+import com.techsultan.bookxchange.model.Chat
 
-class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+class BookAdapter() : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     inner class BookViewHolder(val binding: BooksItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Book>() {
 
         override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.bookId== newItem.bookId
         }
 
         override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
@@ -62,17 +63,39 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
             Glide.with(holder.itemView)
                 .load(book.userProfileImage)
                 .into(profileImage)
+
         }
+        if (book.ownerUid != Firebase.auth.currentUser?.uid) {
+
+            holder.binding.swapOrBuyBtn.setOnClickListener {
+                val directions = HomeFragmentDirections.actionHomeDestToChatDest2(book)
+                Log.d("UserId", "Book UserId: ${book.ownerUid}")
+                it.findNavController().navigate(directions)
+            }
+
+        } else {
+
+            return
+        }
+
+
+
         holder.itemView.setOnClickListener { mView ->
              val directions = HomeFragmentDirections.actionHomeFragmentToDetailsBookFragment(book)
             mView.findNavController().navigate(directions)
-
         }
 
     }
-    private  var onItemClickListener:((Book) -> Unit)? = null
 
-    fun setOnItemClickListener(listener : (Book) -> Unit) {
-        onItemClickListener = listener
+    fun deletePost() {
+        val userId = Firebase.auth.currentUser?.uid
+        val db = Firebase.firestore
+
+        if (userId != null) {
+            db.collection("users").document(userId)
+                .collection("books")
+                .document("")
+        }
     }
+
 }

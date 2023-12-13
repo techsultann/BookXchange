@@ -12,29 +12,27 @@ import com.techsultan.bookxchange.api.RetrofitService
 import com.techsultan.bookxchange.model.Book
 import com.techsultan.bookxchange.model.GoogleBooksResponse
 import com.techsultan.bookxchange.model.VolumeInfo
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.techsultan.bookxchange.model.booksmodel.Result
 
 class BookRepository(val context: Context) {
 
     private val fireStore = Firebase.firestore
     private val auth = Firebase.auth
     private val bookLiveData = MutableLiveData<List<Book>>()
-    private val googleBookService = RetrofitService.api
-    private val googleBooksLiveData : MutableLiveData<List<VolumeInfo>?> = MutableLiveData()
+    private val bookService = RetrofitService.booksApi
 
-    private val _books = MutableLiveData<List<VolumeInfo>>()
-    val books: LiveData<List<VolumeInfo>> get() = _books
+    private val _books = MutableLiveData<GoogleBooksResponse?>()
+    val books: MutableLiveData<GoogleBooksResponse?> get() = _books
 
 
 
     init {
 
         fetchBooks(context)
-        fetchGoogleBooks()
-
+        //fetchGoogleBooks()
     }
+
+    //suspend fun getGoogleBooks(query: String) = RetrofitService.api.getBooks(query)
 
     fun fetchBooks(context : Context): LiveData<List<Book>> {
 
@@ -81,56 +79,56 @@ class BookRepository(val context: Context) {
         return bookLiveData
     }
 
-    fun fetchGoogleBooks() {
-
-        val randomQuery = getRandomSearchQuery()
-        googleBookService.getBooks(randomQuery).enqueue(
-             object : Callback<List<GoogleBooksResponse>> {
-                 override fun onResponse(
-                     call: Call<List<GoogleBooksResponse>>,
-                     response: Response<List<GoogleBooksResponse>>
-                 ) {
-
-                     if (response.isSuccessful) {
-
-                         val booksResponse = response.body()
-                         val books = booksResponse?.mapNotNull { it.volumeInfo } ?: emptyList()
-
-                         Log.d("BooksViewModel", "Fetched Books: $googleBooksLiveData")
-                         _books.value = books
-                         /*googleBooksLiveData.postValue(response.body()!!.sortedByDescending {
-                         it.volumeInfo?.title!!.length }.take(10))*/
-                     } else {
-
-                         Toast.makeText(context, "Can't retrieve books list", Toast.LENGTH_SHORT).show()
-                     }
-
-                 }
-
-                 override fun onFailure(call: Call<List<GoogleBooksResponse>>, t: Throwable) {
-                     googleBooksLiveData.postValue(null)
-
-                     Log.e("BooksViewModel", "API Call Failed: ${t.message}", t)
-                 }
 
 
+    /*suspend fun fetchGoogleBooks(): List<VolumeInfo> {
+
+         try {
+            val response = googleBookService.getGoogle(getRandomSearchQuery())
+             val googleBooksResponse = response.body()
+
+             if (response.isSuccessful && googleBooksResponse?.volumeInfo != null) {
+
+                 return googleBooksResponse.volumeInfo.let { listOf(it) }
+             } else {
+                 Log.d("Google Books", "GOOGLE_BOOKS: $googleBooksResponse")
+                 Log.d("Google Books", "GOOGLE_BOOKS: $response")
+                 throw Exception("Error fetching books")
              }
+         } catch (e: Exception) {
 
-            )
+             Log.d("FETCH BOOKS", e.message!!)
+             throw e
+         }
+    }*/
+    suspend fun fetchBooks(): List<Result> {
+        try {
+            val response = bookService.getBooks()
+            val booksResponse = response.body()
+
+            if (booksResponse?.results != null){
+
+                return booksResponse.results
+            } else {
+                throw Exception("Error fetching books")
+            }
+        } catch (e: Exception) {
+            Log.d("FETCH BOOKS", e.message!!)
+            throw e
+        }
     }
 
     private fun getRandomSearchQuery(): String {
         // Define a list of random search queries
         val randomQueries = listOf(
-            "Android Development",
+            "History",
+          /*  "Android Development",
             "Machine Learning",
-            "Science Fiction",
-            "History"
+            "Science Fiction",*/
+
         )
         return randomQueries.random()
     }
 
-    fun getGoogleBooksLiveData() : LiveData<List<VolumeInfo>?> {
-        return googleBooksLiveData
-    }
+
 }

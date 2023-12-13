@@ -11,6 +11,7 @@ import com.techsultan.bookxchange.R
 import com.techsultan.bookxchange.databinding.GoogleBooksItemBinding
 import com.techsultan.bookxchange.model.GoogleBooksResponse
 import com.techsultan.bookxchange.model.VolumeInfo
+import com.techsultan.bookxchange.model.booksmodel.Result
 
 class GoogleBooksAdapter : RecyclerView.Adapter<GoogleBooksAdapter.GoogleBooksViewHolder>() {
 
@@ -18,17 +19,17 @@ class GoogleBooksAdapter : RecyclerView.Adapter<GoogleBooksAdapter.GoogleBooksVi
         val binding: GoogleBooksItemBinding
         ) : RecyclerView.ViewHolder(binding.root)
 
-    private val differCallBack = object : DiffUtil.ItemCallback<GoogleBooksResponse>() {
+    private val differCallBack = object : DiffUtil.ItemCallback<Result>() {
         override fun areItemsTheSame(
-            oldItem: GoogleBooksResponse,
-            newItem: GoogleBooksResponse
+            oldItem: Result,
+            newItem: Result
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: GoogleBooksResponse,
-            newItem: GoogleBooksResponse
+            oldItem: Result,
+            newItem: Result
         ): Boolean {
             return oldItem == newItem
         }
@@ -49,18 +50,16 @@ class GoogleBooksAdapter : RecyclerView.Adapter<GoogleBooksAdapter.GoogleBooksVi
     }
 
     override fun onBindViewHolder(holder: GoogleBooksViewHolder, position: Int) {
-        val googleBooks = differ.currentList[position]
+        val result = differ.currentList[position]
         holder.binding.apply {
 
-            tvAuthor.text = googleBooks.volumeInfo!!.authors.toString()
-            tvBookName.text = googleBooks.volumeInfo.title
-
             Glide.with(holder.itemView)
-                .load(googleBooks.volumeInfo.imageLinks!!.thumbnail)
-                .placeholder(R.drawable.baseline_book)
+                .load(result.formats.imagejpeg)
                 .fitCenter()
-                .transform(RoundedCorners(10))
+                .transform(RoundedCorners(15))
                 .into(bookImage)
+            tvBookName.text = result.title
+
         }
     }
 

@@ -7,20 +7,10 @@ import android.os.Parcelable
 
 @Parcelize
 data class GoogleBooksResponse(
-    @SerializedName("accessInfo")
-    val accessInfo: AccessInfo?,
-    @SerializedName("etag")
-    val etag: String?,
-    @SerializedName("id")
-    val id: String?,
-    @SerializedName("kind")
-    val kind: String?,
-    @SerializedName("layerInfo")
-    val layerInfo: LayerInfo?,
     @SerializedName("saleInfo")
-    val saleInfo: SaleInfo?,
+    val saleInfo: SaleInfo? = null,
     @SerializedName("selfLink")
-    val selfLink: String?,
+    val selfLink: String? = null,
     @SerializedName("volumeInfo")
     val volumeInfo: VolumeInfo?
 ) : Parcelable

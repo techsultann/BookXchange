@@ -7,6 +7,8 @@ import android.os.Parcelable
 
 @Parcelize
 data class Epub(
+    @SerializedName("acsTokenLink")
+    val acsTokenLink: String?,
     @SerializedName("isAvailable")
     val isAvailable: Boolean?
 ) : Parcelable

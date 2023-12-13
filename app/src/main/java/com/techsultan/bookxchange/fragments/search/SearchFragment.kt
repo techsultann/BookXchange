@@ -1,4 +1,4 @@
-package com.techsultan.bookxchange.fragments
+package com.techsultan.bookxchange.fragments.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.techsultan.bookxchange.MainActivity
-import com.techsultan.bookxchange.R
 import com.techsultan.bookxchange.adapter.GoogleBooksAdapter
 import com.techsultan.bookxchange.databinding.FragmentSearchBinding
-import com.techsultan.bookxchange.util.Resource
 import com.techsultan.bookxchange.viewmodel.BookViewModel
 
 
@@ -25,7 +23,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
@@ -36,7 +34,25 @@ class SearchFragment : Fragment() {
 
         bookViewModel = (activity as MainActivity).viewModel
 
+        val searchBar = binding.searchBar
+        val searchView = binding.searchView
+
+        searchView.setupWithSearchBar(searchBar)
+        searchBar.hint = "What are you looking for?"
+
+        searchBar.onFocusChangeListener = object : View.OnFocusChangeListener {
+            override fun onFocusChange(v: View?, hasFocus: Boolean) {
+                if (hasFocus) {
+                    // Show search suggestions or trigger animation
+                } else {
+                    // Clear search query or perform other actions
+                }
+            }
+
+        }
+
         setupRecyclerView()
+        bookViewModel.fetchBooks()
     }
 
 
@@ -49,13 +65,13 @@ class SearchFragment : Fragment() {
 
         googleBooksAdapter = GoogleBooksAdapter()
 
-        binding.googleBooksRv.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        binding.booksRv.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = googleBooksAdapter
 
-            bookViewModel.googleBooksResult().observe(viewLifecycleOwner) { books ->
+           bookViewModel.books.observe(viewLifecycleOwner) { books ->
+               googleBooksAdapter.differ.submitList(books)
 
-                googleBooksAdapter.differ.currentList
             }
         }
     }

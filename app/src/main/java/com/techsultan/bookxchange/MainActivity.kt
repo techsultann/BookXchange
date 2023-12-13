@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.home_dest, R.id.profile_dest, R.id.search_dest)
+            setOf(R.id.home_dest, R.id.profile_dest, R.id.search_dest, R.id.chat_dest)
         )
 
         setupActionBar(navController, appBarConfiguration)
@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.signup_dest -> {
                     appBarLayout.visibility = View.GONE
+                    bottomNav.visibility = View.GONE
+                }
+
+                R.id.chat_dest -> {
                     bottomNav.visibility = View.GONE
                 }
 

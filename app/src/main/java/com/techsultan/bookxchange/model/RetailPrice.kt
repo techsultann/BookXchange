@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
 @Parcelize
-data class ReadingModes(
-    @SerializedName("image")
-    val image: Boolean?,
-    @SerializedName("text")
-    val text: Boolean?
+data class RetailPrice(
+    @SerializedName("amount")
+    val amount: Double?,
+    @SerializedName("currencyCode")
+    val currencyCode: String?
 ) : Parcelable

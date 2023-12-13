@@ -4,39 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookDetailsFragment">
+    tools:context=".fragments.book_details.BookDetailsFragment">
 
 
     <ImageView
         android:id="@+id/img_Book"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:src="@drawable/menu_book"
+        android:scaleType="fitXY"
+        android:clickable="true"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/tvDetailsBookName"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Harry Potter and the \n Prisoner of Azkaban"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/img_Book"
-        app:layout_constraintTop_toTopOf="@+id/img_Book" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_Book" />
 
     <TextView
         android:id="@+id/tvDetailsBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="by"
         app:layout_constraintStart_toStartOf="@+id/tvDetailsBookName"
         app:layout_constraintTop_toBottomOf="@+id/tvDetailsBookName" />
@@ -46,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Joanne Rowling"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintStart_toEndOf="@+id/tvDetailsBy"
@@ -56,11 +59,9 @@
         android:id="@+id/imgNoBooks"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:src="@drawable/looks_one"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_Book" />
+        app:layout_constraintStart_toStartOf="@+id/tvDetailsBy"
+        app:layout_constraintTop_toBottomOf="@+id/authorName" />
 
     <TextView
         android:id="@+id/tvNumberPage"
@@ -102,17 +103,6 @@
         app:layout_constraintStart_toEndOf="@+id/imgAddress"
         app:layout_constraintTop_toTopOf="@+id/imgAddress" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPages" />
-
     <TextView
         android:id="@+id/tvSynopsis"
         android:layout_width="wrap_content"
@@ -120,20 +110,23 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Synopsis"
+        android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPages" />
 
     <TextView
         android:id="@+id/tv_book_description"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:padding="16dp"
-        android:textSize="18sp"
+        android:layout_marginEnd="16dp"
+        android:gravity="start|top"
         android:text="Harry Potters thirs year at Hogearts starts badly when he learns deranged killer Sirius Black has escaped from Azkaban prison"
-        android:gravity="top"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSynopsis" />
 

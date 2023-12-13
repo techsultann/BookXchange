@@ -10,6 +10,7 @@
     <string name="action_sell">Wants to sell</string>
     <string name="action_buy">Wants to buy</string>
     <string name="action_swap">Wants to swap</string>
+    <string name="email_verification_text">Hi ${displayname}! Use the link below to verify your email and start navigating the Application</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

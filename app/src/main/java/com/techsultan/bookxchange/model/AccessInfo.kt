@@ -19,12 +19,8 @@ data class AccessInfo(
     val pdf: Pdf?,
     @SerializedName("publicDomain")
     val publicDomain: Boolean?,
-    @SerializedName("quoteSharingAllowed")
-    val quoteSharingAllowed: Boolean?,
     @SerializedName("textToSpeechPermission")
     val textToSpeechPermission: String?,
     @SerializedName("viewability")
-    val viewability: String?,
-    @SerializedName("webReaderLink")
-    val webReaderLink: String?
+    val viewability: String?
 ) : Parcelable

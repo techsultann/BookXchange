@@ -6,9 +6,9 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
 @Parcelize
-data class Layer(
-    @SerializedName("layerId")
-    val layerId: String?,
-    @SerializedName("volumeAnnotationsVersion")
-    val volumeAnnotationsVersion: String?
+data class IndustryIdentifier(
+    @SerializedName("identifier")
+    val identifier: String?,
+    @SerializedName("type")
+    val type: String?
 ) : Parcelable

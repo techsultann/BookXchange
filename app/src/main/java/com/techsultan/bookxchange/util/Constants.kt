@@ -4,6 +4,7 @@ class Constants {
 
     companion object{
         const val API_KEY = "AIzaSyCd5uVviUdyu8bfX_adcVKc792ShBdTJRo"
-        const val BASE_URL = "https://www.googleapis.com/books/v1/"
+        const val GOOGLE_BASE_URL = "https://www.gutendex.com/"
+        const val BOOK_URL = "https://gutendex.com/"
     }
 }

@@ -1,4 +1,4 @@
-package com.techsultan.bookxchange.fragments
+package com.techsultan.bookxchange.fragments.add_book
 
 import android.net.Uri
 import android.os.Bundle
@@ -187,6 +187,7 @@ class AddBookFragment : Fragment() {
 
                                         val bookData = Book(
                                             bookId,
+                                            userId,
                                             bookName,
                                             bookDescription,
                                             bookAuthor,
@@ -198,7 +199,7 @@ class AddBookFragment : Fragment() {
                                             userProfileImage
                                         )
 
-                                        // This save the book to firebase firestore
+                                        // This save the book to firebase fire store
                                         fireStore.collection("users").document(userId).collection("books")
                                             .add(bookData)
                                             .addOnSuccessListener {

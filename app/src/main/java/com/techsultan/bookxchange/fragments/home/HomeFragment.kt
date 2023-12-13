@@ -1,4 +1,4 @@
-package com.techsultan.bookxchange
+package com.techsultan.bookxchange.fragments.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,15 +8,16 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.techsultan.bookxchange.MainActivity
+import com.techsultan.bookxchange.R
+import com.techsultan.bookxchange.R.*
 import com.techsultan.bookxchange.adapter.BookAdapter
 import com.techsultan.bookxchange.databinding.FragmentHomeBinding
 import com.techsultan.bookxchange.viewmodel.BookViewModel
@@ -28,7 +29,7 @@ class HomeFragment : Fragment(), MenuProvider {
     private val binding get() = _binding!!
     private lateinit var bookViewModel: BookViewModel
     private lateinit var bookAdapter: BookAdapter
-
+    private val auth = Firebase.auth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +40,8 @@ class HomeFragment : Fragment(), MenuProvider {
 
         return binding.root
 
-
-
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
