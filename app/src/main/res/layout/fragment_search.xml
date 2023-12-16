@@ -6,25 +6,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.search.SearchFragment">
 
-    <com.google.android.material.search.SearchBar
-        android:id="@+id/search_bar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="Search" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.search.SearchBar
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search for books here..." />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.search.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_anchor="@id/search_bar">
+        android:hint="Search for books here...">
         <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_result_rv"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topPickText" />
+        
     </com.google.android.material.search.SearchView>
 
     <TextView
-        android:id="@+id/google_tv"
+        android:id="@+id/topPickText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -35,19 +52,20 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/books_rv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar" />
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/books_rv"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="275dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/google_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/topPickText" />
 
     <TextView
-        android:id="@+id/categoty_tv"
+        android:id="@+id/category_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

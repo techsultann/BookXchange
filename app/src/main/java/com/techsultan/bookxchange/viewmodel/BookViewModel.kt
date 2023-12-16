@@ -27,31 +27,6 @@ class BookViewModel(
     //val getGoogleBooks : MutableLiveData<Resource<GoogleBooksResponse>> = MutableLiveData()
     private val _googleBooks = MutableLiveData<List<VolumeInfo>>()
     val googleBooks : LiveData<List<VolumeInfo>> = _googleBooks
-    private val _books = MutableLiveData<List<Result>>()
-    val books : LiveData<List<Result>> = _books
-
-    fun fetchBooks() {
-        viewModelScope.launch {
-            try {
-                val bookList = repository.fetchBooks()
-                _books.value = bookList
-                Log.d("FETCH GOOGLE BOOKS", "Books fetched successfully")
-            } catch (e: Exception) {
-                Log.d("FETCH GOOGLE BOOKS", e.message!!)
-            }
-        }
-    }
-    /*fun fetchGoogleBooks() {
-        viewModelScope.launch {
-            try {
-                val bookList = repository.fetchGoogleBooks()
-                _googleBooks.value = bookList
-                Log.d("FETCH GOOGLE BOOKS", "Books fetched successfully")
-            } catch (e: Exception) {
-                Log.d("FETCH GOOGLE BOOKS", e.message!!)
-            }
-        }
-    }*/
 
     fun bookResult() = repository.fetchBooks(context = getApplication())
     fun myBooksResult() = repository.myBooksList()

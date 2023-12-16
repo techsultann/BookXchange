@@ -19,7 +19,6 @@ class BookRepository(val context: Context) {
     private val fireStore = Firebase.firestore
     private val auth = Firebase.auth
     private val bookLiveData = MutableLiveData<List<Book>>()
-    private val bookService = RetrofitService.booksApi
 
     private val _books = MutableLiveData<GoogleBooksResponse?>()
     val books: MutableLiveData<GoogleBooksResponse?> get() = _books
@@ -77,45 +76,6 @@ class BookRepository(val context: Context) {
                 }
         }
         return bookLiveData
-    }
-
-
-
-    /*suspend fun fetchGoogleBooks(): List<VolumeInfo> {
-
-         try {
-            val response = googleBookService.getGoogle(getRandomSearchQuery())
-             val googleBooksResponse = response.body()
-
-             if (response.isSuccessful && googleBooksResponse?.volumeInfo != null) {
-
-                 return googleBooksResponse.volumeInfo.let { listOf(it) }
-             } else {
-                 Log.d("Google Books", "GOOGLE_BOOKS: $googleBooksResponse")
-                 Log.d("Google Books", "GOOGLE_BOOKS: $response")
-                 throw Exception("Error fetching books")
-             }
-         } catch (e: Exception) {
-
-             Log.d("FETCH BOOKS", e.message!!)
-             throw e
-         }
-    }*/
-    suspend fun fetchBooks(): List<Result> {
-        try {
-            val response = bookService.getBooks()
-            val booksResponse = response.body()
-
-            if (booksResponse?.results != null){
-
-                return booksResponse.results
-            } else {
-                throw Exception("Error fetching books")
-            }
-        } catch (e: Exception) {
-            Log.d("FETCH BOOKS", e.message!!)
-            throw e
-        }
     }
 
     private fun getRandomSearchQuery(): String {

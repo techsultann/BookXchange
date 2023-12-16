@@ -74,6 +74,10 @@ class MainActivity : AppCompatActivity() {
                     bottomNav.visibility = View.GONE
                 }
 
+                R.id.search_dest -> {
+                    appBarLayout.visibility = View.GONE
+                }
+
                 else -> {
                     appBarLayout.visibility = View.VISIBLE
                     bottomNav.visibility = View.VISIBLE
